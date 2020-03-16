@@ -1,5 +1,5 @@
 from __future__ import absolute_import
 
-from .shaders import Shaders
+from .texture import Texture
 
 del absolute_import

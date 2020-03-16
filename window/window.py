@@ -17,7 +17,7 @@ class Window:
 
         glfw.make_context_current(window)
         glfw.set_window_size_callback(window, self.__window_resize)
-
+        glEnable(GL_DEPTH_TEST)
         self.__main_window = window
 
     def __window_resize(self, window, width, height):
