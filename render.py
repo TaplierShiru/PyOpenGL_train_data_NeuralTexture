@@ -1,12 +1,15 @@
 import glfw
-from OpenGL.GL import *
-from shaders import *
-import numpy
-import pyrr
-from objloader.ObjLoader import *
-from PIL import Image
 import numpy as np
 import cv2
+from PIL import Image
+from OpenGL.GL import *
+import pyrr
+
+
+from shaders import *
+from objloader.ObjLoader import *
+from window import Window
+
 
 show_uv = False
 w_width, w_height = 800, 800
@@ -17,14 +20,14 @@ else:
     path_to_frame_shader = "shaders/shader.fs"
 
 path_to_vertex_shader = "shaders/shader.vs"
-path_to_obj = "res/cube.obj"
-path_to_texture = "res/cube_texture.jpg"
+path_to_obj = "test_data/cube.obj"
+path_to_texture = "test_data/cube_texture.jpg"
 
 def window_resize(window, width, height):
     glViewport(0, 0, width, height)
 
 def main():
-
+    """
     # initialize glfw
     if not glfw.init():
         return
@@ -39,9 +42,11 @@ def main():
 
     glfw.make_context_current(window)
     glfw.set_window_size_callback(window, window_resize)
+    """
+    window = Window(w_width, w_height)
 
     obj = ObjLoader()
-    obj.load_model(path_to_obj)#res/cube.obj
+    obj.load_model(path_to_obj)#test_data/cube.obj
 
     texture_offset = len(obj.vertex_index)*12
 
@@ -71,7 +76,7 @@ def main():
     # load image
     image = Image.open(path_to_texture)
     flipped_image = image.transpose(Image.FLIP_TOP_BOTTOM)
-    img_data = numpy.array(list(flipped_image.getdata()), numpy.uint8)
+    img_data = np.array(list(flipped_image.getdata()), np.uint8)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, image.width, image.height, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data)
     glEnable(GL_TEXTURE_2D)
 
@@ -94,7 +99,7 @@ def main():
     glUniformMatrix4fv(proj_loc, 1, GL_FALSE, projection)
     glUniformMatrix4fv(model_loc, 1, GL_FALSE, model)
 
-    while not glfw.window_should_close(window):
+    while not window.close():
         glfw.poll_events()
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -107,13 +112,12 @@ def main():
 
         glDrawArrays(GL_TRIANGLES, 0, len(obj.vertex_index))
 
-        #glfw.swap_buffers(window)
         image_buffer = glReadPixels(0, 0, w_width, w_height, OpenGL.GL.GL_RGB, OpenGL.GL.GL_UNSIGNED_BYTE)
         image = np.frombuffer(image_buffer, dtype=np.uint8).reshape(w_width, w_height, 3)
         cv2.imwrite("image.png", image)
         
-        glfw.swap_buffers(window)
-        #glfw.destroy_window(window)
+        window.swap_buffers()
+        #window.window_destroy()
         #glfw.terminate()
         #break
 
@@ -121,3 +125,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
