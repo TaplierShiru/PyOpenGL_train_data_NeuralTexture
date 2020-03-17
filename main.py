@@ -11,7 +11,7 @@ from mesh import Mesh
 from data import save_screenshot, save_uv
 
 get_uv = False
-save_data = True
+save_data = False
 w_width, w_height = 800, 800
 
 if get_uv:
