@@ -1,7 +1,7 @@
 # ***Train data for NeuralTexture with PyOpengl***
 This repository generates training data (UV) for NeuralTexture using OpenGL.
 ---
-#***Prerequisite***
+# ***Prerequisite***
 1. [PyOpenGL ***v3.1.5***](https://anaconda.org/conda-forge/pyopengl)
 2. [PyGLFW  ***v1.11.0***](https://anaconda.org/conda-forge/pyglfw)
 3. [Pyrr ***v0.10.3***](https://anaconda.org/conda-forge/pyrr)
