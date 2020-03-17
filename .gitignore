@@ -5,7 +5,7 @@ test
 .ipynb_checkpoints
 docs/make.bat
 docs/Makefile
-
+.vs
 
 
 
