@@ -33,3 +33,8 @@ class Window:
         glfw.destroy_window(self.__main_window)
         return True
 
+    def clearWindowWithColor(self, r=0.0, g=0.0, b=0.0, alpha=1.0):
+        glClearColor(r, g, b, alpha)
+
+    def clearBuffer(self):
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)

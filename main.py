@@ -1,6 +1,4 @@
 import glfw
-import cv2
-from OpenGL.GL import *
 import pyrr
 
 from shaders import Shaders
@@ -12,16 +10,19 @@ from data import save_screenshot, save_uv
 
 get_uv = False
 save_data = False
+
+path_to_v = "data/face/example_with_v.obj"
+path_to_vt = "data/face/example_with_vt.obj"
+
+# Window size
 w_width, w_height = 800, 800
 
 if get_uv:
     path_to_frame_shader = "shaders/shader_uv.fs"
 else:
     path_to_frame_shader = "shaders/shader.fs"
-
 path_to_vertex_shader = "shaders/shader.vs"
-path_to_obj = "data/cube.obj"
-path_to_texture = "data/box.jpg"
+path_to_texture = "data/cube/box.jpg"
 
 path_save_data = 'result/'
 
@@ -29,8 +30,8 @@ def main():
     window = Window(w_width, w_height)
     obj = ObjLoader()
 
-    obj.load_model_with_v('T:/download/woman_2/stab/stabilized_located_frozen/Video15/mesh/10.obj')
-    obj.load_model_with_vt('T:/download/woman_2/test.obj')
+    obj.load_model_with_v(path_to_v)
+    obj.load_model_with_vt(path_to_vt)
     vertices = obj.connect_v_and_vt()
 
     shader = Shaders(path_to_vertex_shader, path_to_frame_shader)
@@ -39,7 +40,7 @@ def main():
     def_texture = Texture(path_to_texture)
     shader.useProgram()
 
-    glClearColor(0.0, 0.0, 0.0, 1.0)
+    window.clearWindowWithColor()
 
     view = pyrr.matrix44.create_from_translation(pyrr.Vector3([0.0, 0.0, 0.0]))
     projection = pyrr.matrix44.create_perspective_projection_matrix(45.0, w_width / w_height, 0.1, 100.0)
@@ -54,7 +55,7 @@ def main():
     while not window.close():
         glfw.poll_events()
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        window.clearBuffer()
 
         # Some transformation on mesh
         rot_x = pyrr.Matrix44.from_x_rotation(0.5 * glfw.get_time())
