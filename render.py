@@ -11,10 +11,10 @@ from objloader.ObjLoader import *
 from window import Window
 from texture import Texture
 
-show_uv = False
+get_uv = False
 w_width, w_height = 800, 800
 
-if show_uv:
+if get_uv:
     path_to_frame_shader = "shaders/shader_uv.fs"
 else:
     path_to_frame_shader = "shaders/shader.fs"
@@ -75,7 +75,7 @@ def main():
 
         image_buffer = glReadPixels(0, 0, w_width, w_height, OpenGL.GL.GL_RGB, OpenGL.GL.GL_UNSIGNED_BYTE)
         image = np.frombuffer(image_buffer, dtype=np.uint8).reshape(w_width, w_height, 3)
-        cv2.imwrite("image.png", image)
+        cv2.imwrite("results/image.png", image)
         
         window.swap_buffers()
         # If you want only single frame, uncomment code below
@@ -87,4 +87,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
