@@ -11,7 +11,7 @@ from mesh import Mesh
 from data import save_screenshot, save_uv
 
 get_uv = False
-save_data = False
+save_data = True
 w_width, w_height = 800, 800
 
 if get_uv:
@@ -23,7 +23,7 @@ path_to_vertex_shader = "shaders/shader.vs"
 path_to_obj = "data/cube.obj"
 path_to_texture = "data/box.jpg"
 
-path_save_data = 'results/'
+path_save_data = 'result/'
 
 def main():
     window = Window(w_width, w_height)
