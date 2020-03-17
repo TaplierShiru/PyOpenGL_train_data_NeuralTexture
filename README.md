@@ -12,10 +12,10 @@ This repository generates training data (UV) for NeuralTexture using OpenGL.
 ---
 
 # ***Usage***
-You may need to modify python code to have different result.
+You may need to modify python code to have different result. All results will be saved in ***results*** folder.
 
 ## ***Get UV data***
-In `main.py` line 14 change `get_uv` to `True` to get UV data. Otherwise you just can see pure mesh with some texture.
+In `main.py` on line 14 change `get_uv` to `True` to get UV data. Otherwise you can just see mesh with some texture.
 
 ## ***Save data***
 To save data, in `main.py` set `save_data` on line 14 as `True`.
