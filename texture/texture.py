@@ -27,7 +27,7 @@ class Texture:
         glBindTexture(GL_TEXTURE_2D, self.__texture)
         return True
 
-    def Clear_texture(self):
+    def clear_texture(self):
         glDeleteTextures([self.__texture])
         return True
 

@@ -23,5 +23,5 @@ class Mesh:
         glEnableVertexAttribArray(1)
 
     def RenderMesh(self):
-        #glBindVertexArray(0)
         glDrawArrays(GL_TRIANGLES, 0, self.size_vertices)
+
