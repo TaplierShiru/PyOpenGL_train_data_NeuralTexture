@@ -13,7 +13,7 @@ save_data = False
 
 path_to_v = "data/face/example_with_v.obj"
 path_to_vt = "data/face/example_with_vt.obj"
-
+path_to_obj = "data/cube/cube.obj"
 # Window size
 w_width, w_height = 800, 800
 
@@ -30,9 +30,17 @@ def main():
     window = Window(w_width, w_height)
     obj = ObjLoader()
 
+    # First function, load v (according to index) into array
     obj.load_model_with_v(path_to_v)
+    # Second function, load vt (according to index) into array.
+    # NOTICE! In `path_to_vt` file there is v, vt, vn components (and indexes for every components),
+    # while in `path_to_v` there is just v (and index for one component v)
     obj.load_model_with_vt(path_to_vt)
+    # Connect v and vt from different files
     vertices = obj.connect_v_and_vt()
+
+    # Load obj file
+    #vertices = obj.load_model_with_v_vt_n(path_to_obj)
 
     shader = Shaders(path_to_vertex_shader, path_to_frame_shader)
     object = Mesh(vertices)
@@ -61,11 +69,11 @@ def main():
         scale = pyrr.Vector3([1.0, 1.0, 1.0])
         rotate = pyrr.quaternion.create()
         # Move relative to the x, y, z axis
-        translation += [0.0, 0.0, -3.2]
+        translation += [0.0, 0.0, -6.0]
         translation_matrix = pyrr.matrix44.create_from_translation(translation)
         matrix *= translation_matrix
         # Rotation, Across axis y
-        rotation = pyrr.quaternion.create_from_y_rotation(np.pi / 2.0)
+        rotation = pyrr.quaternion.create_from_y_rotation(np.pi / 2.0 * glfw.get_time())
         rotate = pyrr.quaternion.cross(rotation, rotate)
         rotate = pyrr.matrix44.create_from_quaternion(rotate)
         matrix *= rotate
