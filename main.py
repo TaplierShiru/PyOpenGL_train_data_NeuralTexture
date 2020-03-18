@@ -55,9 +55,6 @@ def main():
 
     # First function, load v (according to index) into array
     obj.load_model_with_v(path_to_v)
-    # Second function, load vt (according to index) into array.
-    # NOTICE! In `path_to_vt` file there is v, vt, vn components (and indexes for every components),
-    # while in `path_to_v` there is just v (and index for one component v)
     obj.load_model_with_vt(path_to_vt)
     # Connect v and vt from different files
     vertices = obj.connect_v_and_vt()
