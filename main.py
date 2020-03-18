@@ -11,7 +11,7 @@ from data import save_screenshot, save_uv
 
 
 get_uv = False
-save_data = False
+save_data = True
 
 path_to_v = "data/face/example_with_v.obj"
 path_to_vt = "data/face/example_with_vt.obj"
