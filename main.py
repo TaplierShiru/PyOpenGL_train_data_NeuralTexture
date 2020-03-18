@@ -55,7 +55,7 @@ def main():
         glfw.poll_events()
         window.clearBuffer()
 
-        # Some transformation of mesh
+        # Some transformation of mesh, more example are on https://github.com/adamlwgriffiths/Pyrr
         matrix = pyrr.Matrix44.identity()
         translation = pyrr.Vector3()
         scale = pyrr.Vector3([1.0, 1.0, 1.0])
