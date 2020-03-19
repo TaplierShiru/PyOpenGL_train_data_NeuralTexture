@@ -22,7 +22,7 @@ In `main.py` on line 13 change `get_uv` to `True` to get UV data. Otherwise you 
 ## ***Save data***
 To save data, in `main.py` set `save_data` on line 14 as `True`.
 Depends of `get_uv` in `main.py` you can save screenshot (as ***png*** file) if you set `get_uv` equal `True`,
-otherwise or numpy array (as ***npy*** file)
+otherwise it will be numpy array (as ***npy*** file)
 
 ---
 
