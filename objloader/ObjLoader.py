@@ -1,7 +1,7 @@
 import numpy as np
 
 class ObjLoader:
-    def __init__(self):
+    def __init__(self, get_uv: bool):
         self.vert_coords = []
         self.text_coords = []
         self.norm_coords = []
@@ -9,7 +9,7 @@ class ObjLoader:
         self.vertex_index = []
         self.texture_index = []
         self.normal_index = []
-
+        self.get_uv = get_uv
         self.model = []
 
     def load_model_with_v_vt_n(self, file):
@@ -50,12 +50,16 @@ class ObjLoader:
 
         vertex_index = [y for x in vertex_index for y in x]
         texture_index = [y for x in texture_index for y in x]
+        normal_index = [y for x in normal_index for y in x]
 
         for i in texture_index:
             self.text_coords.extend(text_coords[i])
 
         for i in vertex_index:
             self.vert_coords.extend(vert_coords[i])
+
+        for i in normal_index:
+            self.norm_coords.extend(norm_coords[i])
 
         return self.connect_v_and_vt()
 
@@ -120,7 +124,11 @@ class ObjLoader:
         while vert < len(self.vert_coords):
             vertices.extend(self.vert_coords[vert: vert + 3])
             vertices.extend(self.text_coords[text: text + 2])
-
+            if not self.get_uv:
+                if len(self.norm_coords) == 0:
+                    vertices.extend([0.0, 0.0, 0.0])
+                else:
+                    vertices.extend(self.norm_coords[vert: vert + 3])
             vert += 3
             text += 2
 
