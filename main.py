@@ -11,8 +11,8 @@ from mesh import Mesh
 from data import save_screenshot, save_uv
 
 
-get_uv = True
-save_data = True
+get_uv = False
+save_data = False
 
 path_to_v = "data/face/example_with_v.obj"
 path_to_vt = "data/face/example_with_vt.obj"
@@ -73,7 +73,7 @@ def main():
                              pyrr.Vector3([0.5, 0.5, 0.5]), # DiffuseIntensity
                              pyrr.Vector3([1.0, 1.0, 1.0]), # SpecularIntensity
                              pyrr.Vector3([0.0, 0.0, 2.0]), # Direction
-                             512.0                           # Shininess
+                             512.0                          # Shininess
     )
 
     def_texture = Texture(path_to_texture)
